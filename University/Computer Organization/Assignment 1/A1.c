@@ -46,7 +46,7 @@ The 2D image is stored and handled as a 2D array of characters. */
 #define	PL	'+'
 
 /* global variables*/
-FILE *fpin1,*fpout1;	/*pointers to files*/
+FILE *fpin1, *fpout1;	/*pointers to files*/
 
 /*************************************************************/
 /****** void PrImage(Image, Nrows,Ncols) ******/
@@ -58,54 +58,6 @@ void PrImage( char Image[MAXROW][MAXCOL], int Nrows, int Ncols)
 	/* YOUR CODE HERE */
 
 }/*End of PrImage*/
-/*************************************************************/
-/****** void CopyCol(Mat1,Mat2,Nrows,Coli,Colj) ******/
-/* Copy Coli of Mat1 to Colj of Mat2 of the same dimensions */
-void CopyCol( char Mat1[MAXROW][MAXCOL], char Mat2[MAXROW][MAXCOL],
-	int Nrows, int Coli, int Colj)
-{
-
-			/* YOUR CODE HERE */
-			/* THIS ROUTINE IS NOT REQUIRED */
-
-
-}/*End of CopyCol*/
-/*************************************************************/
-/****** void CopyRow(Mat1,Mat2,Ncols,Rowi,Rowj) ******/
-/* Copy row i of Mat1 to row j of Mat2 of the same dimensions */
-void CopyRow( char Mat1[MAXROW][MAXCOL], char Mat2[MAXROW][MAXCOL],
-	int Ncols, int Rowi, int Rowj)
-{
-
-			/* YOUR CODE HERE */
-			/* THIS ROUTINE IS NOT REQUIRED */
-
-}/*End of CopyRow*/
-/*************************************************************/
-/****** void CopyColRow(Mat1,Mat2,Nrows,Coli,Rowj) ******/
-/* Copy col i of Mat1 to row j of Mat2 */
-void CopyColRow( char Mat1[MAXROW][MAXCOL], char Mat2[MAXROW][MAXCOL],
-	int Nrows, int Ncols, int Coli, int Rowj)
-{
-		/* YOUR CODE HERE */
-		/* THIS ROUTINE IS NOT REQUIRED */
-
-}/*End of CopyColRow*/
-/*************************************************************/
-/****** void CopyColrevRow(Mat1,Mat2,Nrows,Ncols,Coli,Rowj) ******/
-/* Copy col i from (Nrows to 0) of Mat1 to row j of Mat2 from 0 to Ncols */
-/* that is, copy the column, from bottom to top element,to the row */
-/* 	copy column (Ncols-1) from (Nrows-1 element) to row (0) from (0) element
-	copy column (Ncols-2) from (Nrows-1 element) to row (1) from (0) element
-	copy column (0) from (Nrows-1 element) to row (Ncols-1) from (0) element*/
-void CopyColrevRow( char Mat1[MAXROW][MAXCOL], char Mat2[MAXROW][MAXCOL],
-	int Nrows, int Ncols, int Coli, int Rowj)
-{
-
-		/* YOUR CODE HERE */
-		/* THIS ROUTINE IS NOT REQUIRED */
-
-}/*End of CopyrevColRow*/
 /*************************************************************/
 /****** void VMirror(Image1, Image2, Nrows, Ncols) ******/
 /* Given the 2D char array of Image1 and its dimensions,
@@ -169,20 +121,6 @@ void DiagL( char Image1[MAXROW][MAXCOL], char Image2[MAXROW][MAXCOL],
 
 }/*End of DiagL*/
 /*************************************************************/
-/****** void RotR(Image1, Image2, Nrows, Ncols) ******/
-/*Given the 2D char array of Image1 and its dimensions,
-	construct the rotated by 90 degree image in Image2 */
-void RotR( char Image1[MAXROW][MAXCOL], char Image2[MAXROW][MAXCOL],
-	int Nrows, int Ncols)
-{
-	fprintf(stdout, "\n Optional task 5 - not implemented \n");
-	fprintf(fpout1, "\n Optional task 5 - not implemented \n");
-
-		/* YOUR CODE HERE - bonus only */
-
-
-}/*End of RotR*/
-/*************************************************************/
 /****** void RdSize(*Nrows,*Ncols) ******/
 /*Read from an input file two integers for the number of rows and
 	number of columns of the image to be processed*/
@@ -228,7 +166,7 @@ int main() {
 		{'+', '&', '&'},{'+', '&', '+'}};
 
 	/* these are probably the real declarations you will need */
-    int Rsize1, Csize1,	/*image sizes*/
+    //int Rsize1, Csize1;	/*image sizes*/
 	char IMchr1[MAXROW][MAXCOL]; /*original image*/
 	char IMchr2[MAXROW][MAXCOL]; /*resulting image after processing*/
 
@@ -244,16 +182,16 @@ int main() {
 	fpout1 = fopen("A1Out.txt", "w");  /* open the file for writing */
 	if (fpout1 == NULL) {
 		fprintf(stdout, "Cannot open output file - Bye\n");
-	return(0); /*if problem, exit program*/
+		return(0); /*if problem, exit program*/
 	}
 
 	/*hello message to screen and output file*/
-	fprintf(stdout, "\n Captain Picard - Student Number V00123456 \n");
+	fprintf(stdout, "\n Carlton Champion - Student Number 240955 \n");
 	fprintf(stdout, "\n File = A1csc230.c	- Fall 2011 \n");
-	fprintf(stdout, "\n Welcome to CSC 230, Assignment 1 \n\n");
-	fprintf(fpout1, "\n Captain Picard - Student Number V00123456 \n");
+	fprintf(stdout, "\n Welcome to 62:367, Assignment 1 \n\n");
+	fprintf(fpout1, "\n Carlton Champion - Student Number 240955 \n");
 	fprintf(fpout1, "\n File = A1csc230.c	- Fall 2011 \n");
-	fprintf(fpout1, "\n Welcome to CSC 230, Assignment 1 \n\n");
+	fprintf(fpout1, "\n Welcome to 62:367, Assignment 1 \n\n");
 
 	fprintf(stdout,"Starting: \n");
 	fprintf(fpout1,"Starting: \n");
