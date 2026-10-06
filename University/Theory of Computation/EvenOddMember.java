@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.*;
 import java.util.regex.*;
 
 public class EvenOddMember
@@ -6,47 +7,30 @@ public class EvenOddMember
 
     public static void main(String[] args) throws IOException
     {
-        FileInputStream in = null;
-        FileInputStream out = null;
+        File in = new File(args[0]);
+        File out = new File(args[1]);
 
         String line;
 
         String evenEven = "(aa|bb|((ab|ba)(aa|bb)*(ab|ba)))*";
         String evenOdd = evenEven + "(b|((a|ab|ba)b(bb)*(a|ab|ba)))" + evenEven;
-        Pattern patEO = Pattern.compile("^"+evenOdd+"$");
+        Pattern patEO = Pattern.compile("^(aa|bb|((ab|ba)(aa|bb)*(ab|ba)))*(b|((ab|ba)b(bb)*(ba|ab))|(ab(bb)*a))(aa|bb|((ab|ba)(aa|bb)*(ab|ba)))*$");
         Matcher testEO;
 
-        try
+        try (Scanner read = new Scanner(in))
         {
-            in = new FileInputStream(args[0]);
-            out = new FileInputStream(args[1]);
+            int lines = Integer.parseInt(read.nextLine());
 
-            char ch = (char) in.read();
-            int lines = ch;
-
-            for (int i = 0; i <= lines; i++)
+            for(int i = 0; i <= lines; i++)
             {
-                line = "";
-                ch = (char) in.read();
-                while (ch != '\n')
-                {
-                    line = line + ch;
-                    ch = (char) in.read();
-                }
+                line = read.nextLine();
                 testEO = patEO.matcher(line);
                 System.out.println(testEO.find());
             }
         }
-        finally
+        catch (FileNotFoundException e)
         {
-            if (in != null)
-            {
-                in.close();
-            }
-            if (out != null)
-            {
-                out.close();
-            }
+            System.out.println("An error occured.");
         }
     }
 }
