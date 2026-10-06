@@ -1,45 +1,6 @@
-/* File: TEMPLATE2.c */
-/* GIVEN TO STUDENTS AS INITIAL TEMPLATE*/
-/* does not compile or execute */
-
-/* This program reads a 2D image from an input file, applies
-to it some image processing transformation upon request and
-prints the output both to the screen and to a file.
-The 2D image is stored and handled as a 2D array of characters. */
-
-/****** PSEUDO CODE: ******
-	*Initialization:
-		Open the input file
-			if problems, print message and exit
-		Open the output file
-				if problems, print message and exit
-		Print a header message to screen and to file
-
-		*Obtain the input data:
-		Read row size and column size of image
-		Read elements of image as integers, convert to characters, and store as 2D char array
-		Print image as characters with headings to screen and to file
-
-		*Processing the image:
-		Repeat until the end of file is reached:
-			Read an integer k from the input file specifying a task for the image
-				Case k of:
-					If 1 then call Vertical Mirror Image routine
-					If 2 then call Horizontal Mirror Image routine
-					If 3 then call Diagonal Right Image routine
-					If 4 then call Diagonal Left Image routine
-					If 5 then call Rotate Right Image routine (BONUS)
-				Print the new image generated with headings to screen and to file
-
-		*Closure:
-		When End of File is reached
-			Print a final message to screen and to file
-			Close input and output files
-		Exit the program*/
-
-/* Code for File I/O to be taken from FileIntegersArray2.c */
-
 #include <stdio.h>	/* include needed libraries */
+#include <stdlib.h>
+#include <string.h>
 #define MAXROW 50	/*set maximum sizes for image 2D array */
 #define MAXCOL 50
 #define	AP	'&'		/*char symbols used in array */
@@ -54,58 +15,23 @@ FILE *fpin1,*fpout1;	/*pointers to files*/
 	both to the screen and to an output file (global) */
 void PrImage( char Image[MAXROW][MAXCOL], int Nrows, int Ncols)
 {
-
-	/* YOUR CODE HERE */
-
+    fprintf(stdout, "\n");
+    fprintf(fpout1, "\n");
+    for(int i = 0; i < Nrows; i++) {
+        for(int j = 0; j < Ncols; j++) {
+            if(Image[i][j] == '0') {
+               	fprintf(stdout, "+ ");
+                fprintf(fpout1, "+ ");
+            }
+            else {
+               	fprintf(stdout, "& ");
+                fprintf(fpout1, "& ");
+            }
+        }
+       	fprintf(stdout, "\n");
+        fprintf(fpout1, "\n");
+    }
 }/*End of PrImage*/
-/*************************************************************/
-/****** void CopyCol(Mat1,Mat2,Nrows,Coli,Colj) ******/
-/* Copy Coli of Mat1 to Colj of Mat2 of the same dimensions */
-void CopyCol( char Mat1[MAXROW][MAXCOL], char Mat2[MAXROW][MAXCOL],
-	int Nrows, int Coli, int Colj)
-{
-
-			/* YOUR CODE HERE */
-			/* THIS ROUTINE IS NOT REQUIRED */
-
-
-}/*End of CopyCol*/
-/*************************************************************/
-/****** void CopyRow(Mat1,Mat2,Ncols,Rowi,Rowj) ******/
-/* Copy row i of Mat1 to row j of Mat2 of the same dimensions */
-void CopyRow( char Mat1[MAXROW][MAXCOL], char Mat2[MAXROW][MAXCOL],
-	int Ncols, int Rowi, int Rowj)
-{
-
-			/* YOUR CODE HERE */
-			/* THIS ROUTINE IS NOT REQUIRED */
-
-}/*End of CopyRow*/
-/*************************************************************/
-/****** void CopyColRow(Mat1,Mat2,Nrows,Coli,Rowj) ******/
-/* Copy col i of Mat1 to row j of Mat2 */
-void CopyColRow( char Mat1[MAXROW][MAXCOL], char Mat2[MAXROW][MAXCOL],
-	int Nrows, int Ncols, int Coli, int Rowj)
-{
-		/* YOUR CODE HERE */
-		/* THIS ROUTINE IS NOT REQUIRED */
-
-}/*End of CopyColRow*/
-/*************************************************************/
-/****** void CopyColrevRow(Mat1,Mat2,Nrows,Ncols,Coli,Rowj) ******/
-/* Copy col i from (Nrows to 0) of Mat1 to row j of Mat2 from 0 to Ncols */
-/* that is, copy the column, from bottom to top element,to the row */
-/* 	copy column (Ncols-1) from (Nrows-1 element) to row (0) from (0) element
-	copy column (Ncols-2) from (Nrows-1 element) to row (1) from (0) element
-	copy column (0) from (Nrows-1 element) to row (Ncols-1) from (0) element*/
-void CopyColrevRow( char Mat1[MAXROW][MAXCOL], char Mat2[MAXROW][MAXCOL],
-	int Nrows, int Ncols, int Coli, int Rowj)
-{
-
-		/* YOUR CODE HERE */
-		/* THIS ROUTINE IS NOT REQUIRED */
-
-}/*End of CopyrevColRow*/
 /*************************************************************/
 /****** void VMirror(Image1, Image2, Nrows, Ncols) ******/
 /* Given the 2D char array of Image1 and its dimensions,
@@ -115,9 +41,15 @@ void CopyColrevRow( char Mat1[MAXROW][MAXCOL], char Mat2[MAXROW][MAXCOL],
 void VMirror( char Image1[MAXROW][MAXCOL], char Image2[MAXROW][MAXCOL],
 	int Nrows, int Ncols)
 {
+    fprintf(stdout, "TASK 1 = Vertical Mirroring\nIMchr2 contains:\n");
+    fprintf(fpout1, "TASK 1 = Vertical Mirroring\nIMchr2 contains:\n");
+    for(int i = 0; i < Nrows; i++) {
+        for(int j = 0; j < Ncols; j++) {
+            Image2[i][Ncols-j-1] = Image1[i][j];
+        }
+    }
 
-		/* YOUR CODE HERE */
-
+    PrImage(Image2, Nrows, Ncols);
 }/*End of VMirror*/
 /*************************************************************/
 /****** void HMirror(Image1, Image2, Nrows, Ncols) ******/
@@ -128,9 +60,15 @@ void VMirror( char Image1[MAXROW][MAXCOL], char Image2[MAXROW][MAXCOL],
 void HMirror( char Image1[MAXROW][MAXCOL], char Image2[MAXROW][MAXCOL],
 	int Nrows, int Ncols)
 {
+    fprintf(stdout, "TASK 2 = Horizontal Mirroring\nIMchr2 contains:\n");
+    fprintf(fpout1, "TASK 2 = Horizontal Mirroring\nIMchr2 contains:\n");
+    for(int i = 0; i < Nrows; i++) {
+        for(int j = 0; j < Ncols; j++) {
+            Image2[Nrows-i-1][j] = Image1[i][j];
+        }
+    }
 
-		/* YOUR CODE HERE */
-
+    PrImage(Image2, Nrows, Ncols);
 }/*End of HMirror*/
 /*************************************************************/
 /****** void DiagR(Image1, Image2, Nrows, Ncols) ******/
@@ -145,10 +83,15 @@ void HMirror( char Image1[MAXROW][MAXCOL], char Image2[MAXROW][MAXCOL],
 void DiagR( char Image1[MAXROW][MAXCOL], char Image2[MAXROW][MAXCOL],
 	int Nrows, int Ncols)
 {
+    fprintf(stdout, "TASK 3 = Diagonal Right\nIMchr2 contains:\n");
+    fprintf(fpout1, "TASK 3 = Diagonal Right\nIMchr2 contains:\n");
+    for(int i = 0; i < Nrows; i++) {
+        for(int j = 0; j < Ncols; j++) {
+            Image2[j][i] = Image1[i][j];
+        }
+    }
 
-		/* YOUR CODE HERE */
-
-
+    PrImage(Image2, Ncols, Nrows);
 }/*End of DiagR*/
 /*************************************************************/
 /****** void DiagL(Image1, Image2, Nrows, Ncols) ******/
@@ -163,10 +106,15 @@ void DiagR( char Image1[MAXROW][MAXCOL], char Image2[MAXROW][MAXCOL],
 void DiagL( char Image1[MAXROW][MAXCOL], char Image2[MAXROW][MAXCOL],
 	int Nrows, int Ncols)
 {
+    fprintf(stdout, "TASK 4 = Diagonal Left\nIMchr2 contains:\n");
+    fprintf(fpout1, "TASK 4 = Diagonal Left\nIMchr2 contains:\n");
+    for(int i = 0; i < Nrows; i++) {
+        for(int j = 0; j < Ncols; j++) {
+            Image2[Ncols-j-1][Nrows-i-1] = Image1[i][j];
+        }
+    }
 
-		/* YOUR CODE HERE */
-
-
+    PrImage(Image2, Ncols, Nrows);
 }/*End of DiagL*/
 /*************************************************************/
 /****** void RotR(Image1, Image2, Nrows, Ncols) ******/
@@ -175,12 +123,15 @@ void DiagL( char Image1[MAXROW][MAXCOL], char Image2[MAXROW][MAXCOL],
 void RotR( char Image1[MAXROW][MAXCOL], char Image2[MAXROW][MAXCOL],
 	int Nrows, int Ncols)
 {
-	fprintf(stdout, "\n Optional task 5 - not implemented \n");
-	fprintf(fpout1, "\n Optional task 5 - not implemented \n");
+    fprintf(stdout, "TASK 5 = Rotation Right\nIMchr2 contains:\n");
+    fprintf(fpout1, "TASK 5 = Rotation Right\nIMchr2 contains:\n");
+    for(int i = 0; i < Nrows; i++) {
+        for(int j = 0; j < Ncols; j++) {
+            Image2[j][Nrows-i-1] = Image1[i][j];
+        }
+    }
 
-		/* YOUR CODE HERE - bonus only */
-
-
+    PrImage(Image2, Ncols, Nrows);
 }/*End of RotR*/
 /*************************************************************/
 /****** void RdSize(*Nrows,*Ncols) ******/
@@ -188,8 +139,16 @@ void RotR( char Image1[MAXROW][MAXCOL], char Image2[MAXROW][MAXCOL],
 	number of columns of the image to be processed*/
 void RdSize(int *Nrows, int *Ncols)
 {
+    //Created with set length 1 over so \0 char gets added automatically so array doesnt overflow
+    char rows[3] = {getc(fpin1), getc(fpin1)};
+    *Nrows = atoi(rows);
 
-		/* YOUR CODE HERE */
+    //Created with set length 1 over so \0 char gets added automatically so array doesnt overflow
+    char cols[4] = {getc(fpin1)}, ch = getc(fpin1);
+    //can sometimes end up with character 'control return', so to prevent that it will skip any character of value 13
+    if(ch != '\n' && ch != 13) cols[1] = ch;
+    if( (ch = getc(fpin1)) != '\n' && ch != 13) cols[2] = ch;
+    *Ncols = atoi(cols);
 
 }/*End of RdSize*/
 /*************************************************************/
@@ -198,9 +157,23 @@ void RdSize(int *Nrows, int *Ncols)
 	be processed and store the corresponding character in the 2D array*/
 void RdImage(char Image1[MAXROW][MAXCOL],int Nrows, int Ncols)
 {
+    char ch;
+    //Goes through each row after every colomn on prev row has been visited
+    for(int i = 0; i < Nrows; i++) {
+        for(int j = 0; j < Ncols; j++) {
+            do
+                ch = getc(fpin1);
+            //skips any spaces or newline characters so that it doesn't clog up the image data
+            while(ch != '1' && ch != '0');
+            //if the file's end is reached, stop reading
+            if(ch == EOF) break;
 
-		/* YOUR CODE HERE */
+            Image1[i][j] = ch;
 
+            ch = getc(fpin1);
+        }
+        if(ch == EOF) break;
+    }
 }/*End of RdImage*/
 /*************************************************************/
 /****** void RdDoTask(Image1,Image2,Nrows,Ncols)***/
@@ -209,9 +182,33 @@ the appropriate stub routine for each task represented*/
 int RdDoTask(char Image1[MAXROW][MAXCOL],
 			char Image2[MAXROW][MAXCOL],int Nrows, int Ncols)
 {
+    char ch;
 
-		/* YOUR CODE HERE */
-
+    do
+    {
+        do
+            ch = getc(fpin1);
+        while(ch == ' ' || ch == '\n');
+        switch (ch) {
+            case '1':
+                VMirror(Image1, Image2, Nrows, Ncols);
+                break;
+            case '2':
+                HMirror(Image1, Image2, Nrows, Ncols);
+                break;
+            case '3':
+                DiagR(Image1, Image2, Nrows, Ncols);
+                break;
+            case '4':
+                DiagL(Image1, Image2, Nrows, Ncols);
+                break;
+            case '5':
+                RotR(Image1, Image2, Nrows, Ncols);
+                break;
+        }
+    }
+    while(ch != EOF);
+    return(0);
 } /*End RdDoTask*/
 
 
@@ -221,21 +218,24 @@ int main() {
 
     int	eof;
 
-    /* Initialize a 4x3 char image for testing*/
-	int Rsize1 = 4;
-	int Csize1 = 3;
-	char IM1[MAXROW][MAXCOL] = {{'+', '+', '&'},{'+', '&', '&'},
-		{'+', '&', '&'},{'+', '&', '+'}};
-
 	/* these are probably the real declarations you will need */
-    int Rsize1, Csize1,	/*image sizes*/
+    int Rsize1, Csize1;	/*image sizes*/
 	char IMchr1[MAXROW][MAXCOL]; /*original image*/
 	char IMchr2[MAXROW][MAXCOL]; /*resulting image after processing*/
 
 	fprintf(stdout, "Hello:\n");		/*start of program*/
 
+	char fileName[50];
+
+	fprintf(stdout, "\nWhat is the name of the file you'd like to edit? (Assuming .txt): ");
+
+	scanf("%s", fileName);
+	strcat(fileName, ".txt");
+
+	fprintf(stdout, "\n\n\n\n");
+
 	/*open all input and output files*/
-	fpin1 = fopen("A1In.txt", "r");  /* open the file for reading */
+	fpin1 = fopen(fileName, "r");  /* open the file for reading */
 	if (fpin1 == NULL) {
 		fprintf(stdout, "Cannot open input file - Bye\n");
 		return(0); /*if problem, exit program*/
@@ -244,33 +244,37 @@ int main() {
 	fpout1 = fopen("A1Out.txt", "w");  /* open the file for writing */
 	if (fpout1 == NULL) {
 		fprintf(stdout, "Cannot open output file - Bye\n");
-	return(0); /*if problem, exit program*/
+		return(0); /*if problem, exit program*/
 	}
 
 	/*hello message to screen and output file*/
-	fprintf(stdout, "\n Captain Picard - Student Number V00123456 \n");
-	fprintf(stdout, "\n File = A1csc230.c	- Fall 2011 \n");
-	fprintf(stdout, "\n Welcome to CSC 230, Assignment 1 \n\n");
-	fprintf(fpout1, "\n Captain Picard - Student Number V00123456 \n");
-	fprintf(fpout1, "\n File = A1csc230.c	- Fall 2011 \n");
-	fprintf(fpout1, "\n Welcome to CSC 230, Assignment 1 \n\n");
+	fprintf(stdout, "Carlton Champion - Student Number 240955 \n");
+	fprintf(stdout, "\n File = %s - Fall 2026 \n", fileName);
+	fprintf(stdout, "\n Welcome to 62:367, Assignment 1 \n\n");
+	fprintf(fpout1, "Carlton Champion - Student Number 240955 \n");
+	fprintf(fpout1, "\n File = %s - Fall 2026 \n", fileName);
+	fprintf(fpout1, "\n Welcome to 62:367, Assignment 1 \n\n");
 
 	fprintf(stdout,"Starting: \n");
 	fprintf(fpout1,"Starting: \n");
 
 	/*Read in the sizes for the image*/
 	/* call RdSize */
+	RdSize(&Rsize1, &Csize1);
 	/*Read in the image*/
 	/* call RdImage */
+	RdImage(IMchr1, Rsize1, Csize1);
 
 	/*Print the initial image*/
 	fprintf(stdout, " Initial IMchr1 contains: \n");
 	fprintf(fpout1, " Initial IMchr1 contains: \n");
 	/* call PrImage */
+	PrImage(IMchr1, Rsize1, Csize1);
 
 	/* read all integers from file until EOF - for each call the
 	required stub routine for the image processing task*/
 	/* call RdDoTask */
+	RdDoTask(IMchr1, IMchr2, Rsize1, Csize1);
 
 	/* Closure */
 	fprintf(stdout, "\n The program is all done - Bye! \n");
