@@ -1,0 +1,8 @@
+b 1 2 1
+NONE
+b 2 3 1
+bbb 1 4 3
+babab 1 6 5
+aabaa 2 7 5
+aba 4 7 3
+abbba 0 5 5
