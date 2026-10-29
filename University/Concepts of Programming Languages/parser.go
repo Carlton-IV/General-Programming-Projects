@@ -28,15 +28,13 @@ func scanner(phrase string) ([]string, bool) {
 		invalidUnits = " [] "
 	}
 	for _, x := range arr {
-		for _, y := range x {
-			switch y {
-			case '+', '*', '/', '-':
-			default:
-				_, err := strconv.Atoi(string(y))
+		switch x {
+		case "+", "*", "/", "-":
+		default:
+			_, err := strconv.Atoi(x)
 
-				if err != nil {
-					invalidUnits += " [" + string(y) + "],"
-				}
+			if err != nil {
+				invalidUnits += " [" + x + "],"
 			}
 		}
 	}
